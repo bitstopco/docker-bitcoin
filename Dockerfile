@@ -7,7 +7,6 @@ RUN useradd -r bitcoin \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ENV BITCOIN_VERSION=0.17.1
-ENV BITCOIN_DATA=/home/bitcoin/.bitcoin
 ENV PATH=/opt/bitcoin-${BITCOIN_VERSION}/bin:$PATH
 
 RUN curl -SL https://bitcoin.org/laanwj-releases.asc | gpg --batch --import \
@@ -17,8 +16,6 @@ RUN curl -SL https://bitcoin.org/laanwj-releases.asc | gpg --batch --import \
   && grep " bitcoin-${BITCOIN_VERSION}-x86_64-linux-gnu.tar.gz\$" SHA256SUMS.asc | sha256sum -c - \
   && tar -xzf *.tar.gz -C /opt \
   && rm *.tar.gz *.asc
-
-VOLUME ["/home/bitcoin/.bitcoin"]
 
 EXPOSE 8332 8333 18332 18333 18443 18444
 
