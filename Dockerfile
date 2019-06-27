@@ -6,7 +6,7 @@ RUN useradd -r bitcoin \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ENV BITCOIN_VERSION=0.17.1
+ENV BITCOIN_VERSION=0.18.0
 ENV PATH=/opt/bitcoin-${BITCOIN_VERSION}/bin:$PATH
 
 RUN curl -SL https://bitcoin.org/laanwj-releases.asc | gpg --batch --import \
@@ -17,6 +17,6 @@ RUN curl -SL https://bitcoin.org/laanwj-releases.asc | gpg --batch --import \
   && tar -xzf *.tar.gz -C /opt \
   && rm *.tar.gz *.asc
 
-EXPOSE 8332 8333 18332 18333 18443 18444
+EXPOSE 8332 8333
 
 CMD ["bitcoind"]
